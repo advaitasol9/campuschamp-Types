@@ -147,9 +147,22 @@ type previousEducation = {
   results: educationResult[];
 };
 
+type hostel = entity & {
+  address: string;
+};
+
+// school grade entity
+
+type gradeSectionSubject = {
+  grade: grade;
+  sections: section[];
+  subjectDetails: subject[];
+  examinationAndMarks: examination[];
+};
+
 // school student entities
 
-type student = person & {
+type studentDetails = person & {
   grade: grade;
   section: section;
   medium: medium;
@@ -187,9 +200,21 @@ type studentGuardian = person & {
   relationship: relationship;
 };
 
+type student = {
+  studentDetails: studentDetails;
+  familyDetails: {
+    fatherDetails: studentFather;
+    motherDetails: studentMother;
+    hasSibling: boolean;
+    siblingDetails: studentSibling[];
+    hasGuardian: boolean;
+    guardianDetails: studentGuardian;
+  };
+};
+
 // school teacher entities
 
-type teacher = person & {
+type teacherPersonalDetails = person & {
   jobRole: jobRole;
   designation: deisgnation;
   grade: grade;
@@ -198,6 +223,15 @@ type teacher = person & {
   isPhysicalyDisabled: boolean;
   physicalDisability: string;
   languages: languageProficiency[];
+  permanentDoorNumber: string;
+  permanentCity: string;
+  permanentDistrict: string;
+  permanentState: state;
+  permanentPinCode: number;
+  permanentPrimaryMobileNumber: string;
+  permanentSecondaryMobileNumber: string;
+  permanentEmailID: string;
+  permanentIsRuralOrUrban: "rural" | "urban";
   isFamilyPoliticallyExposed: boolean;
   politicalExposureDetails: string;
   hasMedicalProblem: boolean;
@@ -229,7 +263,7 @@ type teacherEmergencyContact = {
   mobileNumber: number;
 };
 
-type educationQualifications = entity & {
+type educationQualification = entity & {
   qualification: educationLevel;
   board: string;
   medium: medium;
@@ -269,4 +303,35 @@ type researchExperience = {
   edition: Date;
   isbnNumber: number;
   webLink: string;
+};
+
+type teacher = {
+  personalDetails: teacherPersonalDetails;
+  familyDetails: {
+    fatherDetails: teacherFather;
+    motherDetails: teacherMother;
+    maritalStatus: maritalStatus;
+    spouseDetails: teacherSpouse;
+    haveChildren: boolean;
+    childrenDetails: teacherChildren[];
+    emergencyContactDetails: teacherEmergencyContact;
+  };
+  educationDetails: {
+    qualifications: educationQualification[];
+    experiences: experienceDetails[];
+  };
+  payrollDetails: payrollDetails;
+  documents: {
+    idProofs: document[];
+    payslips: document[];
+    resume: document;
+    certificate: document[];
+    researchExperience: researchExperience[];
+    others: {
+      hostel: {
+        optForHostel: boolean;
+        hostel: hostel;
+      };
+    };
+  };
 };
