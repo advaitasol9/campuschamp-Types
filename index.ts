@@ -335,3 +335,11 @@ type teacher = {
     };
   };
 };
+
+type department = entity & {
+  type: 'academic' | 'functional';
+  shortCode?: string;
+  degrees: educationLevel;
+  tags?: string[];
+}
+
