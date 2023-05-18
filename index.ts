@@ -343,3 +343,13 @@ type department = entity & {
   tags?: string[];
 }
 
+type programme = entity & {
+  department: department;
+  duration: string;
+  degree_type: 'under graduate' | 'post graduate' | diploma;
+  type: 'regular' | 'distance';
+ }
+
+type classSection = entity & {
+  programme: programme;
+ }
